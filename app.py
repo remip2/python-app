@@ -1,6 +1,6 @@
 import os
 
-import psycopg3
+import psycopg2
 
 from flask import Flask, render_template  # From module flask import class Flask
 app = Flask(__name__)    # Construct an instance of Flask class for our webapp
@@ -10,7 +10,7 @@ db = os.environ['DBNAME']
 db_user = os.environ['DBUSER']
 db_password = os.environ['DBPASSWORD']
 
-db_conn = psycopg3.connect(host=host, dbname=db, user=db_user, password=db_password)
+db_conn = psycopg2.connect(host=host, dbname=db, user=db_user, password=db_password)
 
 @app.route('/')   # URL '/' to be handled by main() route handler
 def main():
