@@ -24,7 +24,7 @@ def main():
     
         if data:
             count = data[0] + 1
-            cur.execute("UPDATE counter SET count=%s WHERE name='counter1'", (count)); 
+            cur.execute("UPDATE counter SET count=%d WHERE name='counter1'", (count)); 
             db_conn.commit();
 
    return render_template('index.html', count=count)
