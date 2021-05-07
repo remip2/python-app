@@ -20,7 +20,7 @@ def main():
    if db_conn:
         cur = db_conn.cursor()
         cur.execute("SELECT count FROM counter WHERE name='counter1'")
-        data = cursor.fetchone()
+        data = cur.fetchone()
     
         if data:
             count = data[0] 
