@@ -1,23 +1,24 @@
 import os
 
+import psycopg2
+
 from flask import Flask, render_template  # From module flask import class Flask
-from flask_mysqldb import MySQL
 app = Flask(__name__)    # Construct an instance of Flask class for our webapp
 
-app.config['MYSQL_HOST'] = os.environ['DBHOST']
-app.config['MYSQL_DB'] = os.environ['DBNAME']
-app.config['MYSQL_USER'] = os.environ['DBUSER']
-app.config['MYSQL_PASSWORD'] = os.environ['DBPASSWORD']
+host = os.environ['DBHOST']
+db = os.environ['DBNAME']
+db_user = os.environ['DBUSER']
+db_password = os.environ['DBPASSWORD']
 
-mysql = MySQL(app)
+db_conn = psycopg2.connect(host=host, dbname=db, user=db_user, password=db_password)
 
 @app.route('/')   # URL '/' to be handled by main() route handler
 def main():
 
    count = 'infinity'
 
-   if mysql:
-        cur = mysql.connection.cursor()
+   if db_conn:
+        cur = db_conn.cursor()
         cur.execute("SELECT count FROM counter WHERE name='counter1'")
         data = cursor.fetchone()
     
